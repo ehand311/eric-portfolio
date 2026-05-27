@@ -198,7 +198,7 @@ const credentials = [
     eyebrow: "MBA",
     logoUrl: "/logos/knauss_school_of_business_logo.png",
     items: [
-      "Master of Business Administration.",
+      "Master of Business Administration",
       "Dean's List.",
       "Vice President, MBA Student Veteran Club.",
       "Student Veterans Organization.",
@@ -209,7 +209,7 @@ const credentials = [
     eyebrow: "Bachelor of Science",
     logoUrl: "/logos/united_states_naval_academy_logo.png",
     items: [
-      "Bachelor of Science graduate.",
+      "Bachelor of Science",
       "Soccer Team.",
       "Leadership Council.",
     ],
@@ -1148,7 +1148,11 @@ const offClock = [
     display: flex;
     align-items: center;
     gap: 14px;
-    margin: 18px 0 16px;
+    margin: 18px 0 18px;
+  }
+
+  .status-title .logo-tile {
+    margin: 0 8px 8px 0;
   }
 
   .status-tags {
@@ -1621,7 +1625,7 @@ const offClock = [
 
   .cert-badges {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 8px;
     margin-top: 18px;
   }
@@ -1634,14 +1638,7 @@ const offClock = [
     font-family: var(--mono);
     font-size: 11px;
     line-height: 1;
-  }
-
-  .cert-card:first-child .cert-badges span:first-child,
-  .cert-card:first-child .cert-badges span:nth-child(2),
-  .cert-card:first-child .cert-badges span:nth-child(3),
-  .cert-card:first-child .cert-badges span:nth-child(4) {
-    border-color: rgba(215, 173, 69, 0.55);
-    color: var(--accent);
+    white-space: nowrap;
   }
 
   article {
@@ -1823,12 +1820,14 @@ const offClock = [
   }
 
   .logo-tile {
+    position: relative;
     display: grid;
     flex: 0 0 auto;
     place-items: center;
     width: 44px;
     height: 44px;
     border: 1px solid rgba(244, 242, 236, 0.14);
+    border-radius: 8px;
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06)),
       rgba(44, 44, 43, 0.92);
@@ -1837,11 +1836,24 @@ const offClock = [
       0 8px 24px rgba(0, 0, 0, 0.16);
   }
 
+  .logo-tile::after {
+    content: "";
+    position: absolute;
+    inset: 7px -5px -5px 7px;
+    z-index: -1;
+    border: 1px solid rgba(215, 173, 69, 0.85);
+    border-radius: 9px;
+    opacity: 0.9;
+    transition:
+      inset 160ms ease,
+      opacity 160ms ease;
+  }
+
   .logo-tile img {
     display: block;
     max-width: 32px;
     max-height: 32px;
-    border-radius: 2px;
+    border-radius: 4px;
     opacity: 0.95;
     object-fit: contain;
     transition:
@@ -1852,6 +1864,12 @@ const offClock = [
   article:hover .logo-tile img,
   .status-panel:hover .logo-tile img {
     transform: scale(1.04);
+    opacity: 1;
+  }
+
+  article:hover .logo-tile::after,
+  .status-panel:hover .logo-tile::after {
+    inset: 6px -6px -6px 6px;
     opacity: 1;
   }
 
@@ -2057,6 +2075,10 @@ const offClock = [
     .credential-layout {
       grid-template-columns: 1fr;
       gap: 50px;
+    }
+
+    .cert-badges {
+      flex-wrap: wrap;
     }
 
     .stats div {
