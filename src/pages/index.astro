@@ -41,6 +41,48 @@ const stats = [
   ["55+", "Product and system capabilities implemented"],
 ];
 
+const credentialStats = [
+  ["4", "GIAC cloud security certs"],
+  ["3", "AWS cloud credentials"],
+  ["MS", "Cybersecurity in progress"],
+  ["MBA", "Business leadership"],
+];
+
+const selectedWork = [
+  {
+    number: "01",
+    label: "Security Engineering",
+    title: "Infrastructure Security Program Delivery",
+    description:
+      "Program leadership for security engineering initiatives that protect infrastructure, product surfaces, and operational workflows at scale.",
+    tags: ["Cloudflare", "Security TPM", "Infrastructure"],
+  },
+  {
+    number: "02",
+    label: "Agentic Workflows",
+    title: "AI-Enabled Program Operations",
+    description:
+      "Exploring practical AI and agentic workflows for technical program management, security operations, and internal tooling.",
+    tags: ["AI", "Automation", "Delivery"],
+  },
+  {
+    number: "03",
+    label: "Risk Systems",
+    title: "Platform Risk Detection & Response",
+    description:
+      "Risk systems programs improving detection, response time, ownership, and business protection across large-scale platform environments.",
+    tags: ["Meta", "Facebook", "Risk Operations"],
+  },
+  {
+    number: "04",
+    label: "Data Governance",
+    title: "Privacy & Compliance Product Delivery",
+    description:
+      "Cross-functional delivery of data governance and privacy capabilities tied to GDPR, CCPA, regulatory exposure, and executive operations.",
+    tags: ["PayPal", "Privacy", "Compliance"],
+  },
+];
+
 const experience = [
   {
     dates: "2024 - Present",
@@ -179,6 +221,7 @@ const certifications = [
     title: "GIAC Cloud Security",
     eyebrow: "Certifications",
     logoUrl: "/logos/giac_logo.png",
+    badges: ["GCTD", "GCSA", "GCPS", "GCLD", "GIAC Advisory Board"],
     items: [
       "Cloud Threat Detection (GCTD), issued Jul 2024.",
       "Cloud DevSecOps & Automation (GCSA), issued Feb 2024.",
@@ -191,6 +234,7 @@ const certifications = [
     title: "AWS Cloud",
     eyebrow: "Certifications",
     logoUrl: "/logos/amazon_web_services_logo.png",
+    badges: ["Solutions Architect", "Security", "Cloud Practitioner"],
     items: [
       "AWS Cloud: Solutions Architect, issued Nov 2023.",
       "AWS Cloud: Security, issued Oct 2023.",
@@ -201,6 +245,7 @@ const certifications = [
     title: "Security & Technical Foundations",
     eyebrow: "Certifications",
     logoUrl: "/logos/comptia_logo.png",
+    badges: ["Security+", "Wireshark", "TCPDump", "Windows Defender", "Python"],
     items: [
       "CompTIA Security+ Certification, issued Jul 2023.",
       "Introduction to Wireshark: Network Packet Capture, Coursera, issued Jul 2023.",
@@ -213,17 +258,23 @@ const certifications = [
     title: "Product & Data",
     eyebrow: "Professional Development",
     logoUrl: "/logos/product_school_logo.png",
+    badges: ["Product Management", "Machine Learning", "SQL", "Digital Product"],
     items: [
       "Product Management, Product School, issued Feb 2020.",
       "Machine Learning, Coursera, issued May 2020.",
       "SQL Bootcamp, Udemy, issued Sep 2019.",
       "Digital Product Management, University of Virginia, issued Jun 2019.",
-      "BreakLine Participant, issued Sep 2018.",
     ],
   },
 ];
 
 const offClock = [
+  {
+    label: "// family",
+    title: "Family time with Kelly, Reagan, Ryan, and Ranger",
+    description:
+      "Enjoying time with my wonderful wife, Kelly; our two beautiful children, Reagan and Ryan; and our dog, Ranger.",
+  },
   {
     label: "// training",
     title: "Brazilian Jiu Jitsu, lifting, and running",
@@ -256,8 +307,9 @@ const offClock = [
 
       <nav aria-label="Primary navigation">
         <a href="#about">About</a>
-        <a href="#experience">Experience</a>
         <a href="#focus">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#work">Work</a>
         <a href="#credentials">Credentials</a>
         <a href="https://medium.com/@erichandal_84180" target="_blank" rel="noreferrer">Blog</a>
         <a href="#contact">Contact</a>
@@ -305,24 +357,44 @@ const offClock = [
 
             <p class="intro">
               Security professional and former Naval Officer who has led global
-              teams across 3 continents. I have safeguarded $50M+ in revenue and
+              teams across 3 continents. I have safeguarded $55M+ in revenue and
               generated $2.5M+ in savings through 55+ product, system, and
               infrastructure capability implementations.
             </p>
 
             <div class="actions">
-              <a href="#experience">View Experience</a>
+              <a class="primary-action" href="#work">View Selected Work</a>
+              <a href="#experience">Experience</a>
               <a href="https://www.linkedin.com/in/erichandal/" target="_blank" rel="noreferrer">LinkedIn</a>
-              <a href="https://github.com/ehand311" target="_blank" rel="noreferrer">GitHub</a>
-              <a href="https://medium.com/@erichandal_84180" target="_blank" rel="noreferrer">Blog</a>
               <a href="mailto:erichandal@gmail.com">Email</a>
             </div>
           </div>
 
           <aside class="status-panel" aria-label="Current focus">
             <p>ACTIVE</p>
-            <strong>Cloudflare</strong>
-            <span>Security engineering | Product delivery | Infrastructure protection | Agentic workflow delivery</span>
+            <div class="status-title">
+              <span class="logo-tile" aria-hidden="true">
+                <img
+                  src="/logos/cloudflare_logo.png"
+                  alt=""
+                  width="40"
+                  height="40"
+                  loading="eager"
+                  decoding="async"
+                />
+              </span>
+              <strong>Cloudflare</strong>
+            </div>
+            <ul class="status-tags" aria-label="Current focus areas">
+              <li>Security engineering</li>
+              <li>Product delivery</li>
+              <li>Infrastructure protection</li>
+              <li>Agentic workflow delivery</li>
+            </ul>
+            <p class="status-note">
+              Currently focused on security engineering delivery, infrastructure
+              protection, and agentic workflow systems at Cloudflare.
+            </p>
           </aside>
         </div>
       </section>
@@ -349,9 +421,9 @@ const offClock = [
           <div>
             <h2>About Me</h2>
             <p>
-              Security professional, former Naval Officer, and technical program
-              leader focused on cloud security, data governance, risk systems,
-              and product delivery at scale.
+              Security professional, technical program leader, and former Naval
+              Officer with a passion for cloud security, building risk systems,
+              data and AI governance, and delivering products at scale.
             </p>
           </div>
         </div>
@@ -372,10 +444,10 @@ const offClock = [
             <ul class="skill-list">
               <li>Leadership</li>
               <li>Risk Management</li>
-              <li>Program Management</li>
+              <li>Technical Program Management</li>
               <li>Product Strategy</li>
-              <li>Cloud Security</li>
-              <li>Data Governance</li>
+              <li>Cloud & Infrastructure Security</li>
+              <li>Data & AI Governance</li>
             </ul>
           </div>
 
@@ -457,6 +529,7 @@ const offClock = [
           {experience.map((job) => (
             <article class="reveal-child">
               <time>{job.dates}</time>
+              <span class="timeline-marker" aria-hidden="true"></span>
               <div class="job-body">
                 <div class="job-heading">
                   <div>
@@ -489,9 +562,38 @@ const offClock = [
         </div>
       </section>
 
+      <section class="section reveal" id="work">
+        <div class="section-heading">
+          <span>04 SELECTED WORK</span>
+          <div>
+            <h2>Programs & Systems</h2>
+            <p>
+              Representative areas of work across security engineering, risk
+              systems, privacy, and AI-enabled program operations.
+            </p>
+          </div>
+        </div>
+
+        <div class="work-grid">
+          {selectedWork.map((work) => (
+            <article class="work-card reveal-child">
+              <div class="work-card-top">
+                <span class="work-number">{work.number}</span>
+                <span class="label">{work.label}</span>
+              </div>
+              <h3>{work.title}</h3>
+              <p>{work.description}</p>
+              <div class="tag-list" aria-label={`${work.title} tags`}>
+                {work.tags.map((tag) => <span>{tag}</span>)}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section class="section reveal" id="credentials">
         <div class="section-heading">
-          <span>04 CREDENTIALS</span>
+          <span>05 CREDENTIALS</span>
           <div>
             <h2>Education & Certs</h2>
             <p>
@@ -501,65 +603,87 @@ const offClock = [
           </div>
         </div>
 
-        <div class="credential-grid">
-          {credentials.map((group) => (
-            <article class="reveal-child">
-              <span class="label">{group.eyebrow}</span>
-              <div class="card-title">
-                <span class="logo-tile" aria-hidden="true">
-                  <img
-                    src={group.logoUrl}
-                    alt=""
-                    width="40"
-                    height="40"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </span>
-                <h3>{group.title}</h3>
-              </div>
-              <ul>
-                {group.items.map((item) => <li>{item}</li>)}
-              </ul>
-            </article>
-          ))}
-          {certifications.map((group) => (
-            <article class="reveal-child">
-              <span class="label">{group.eyebrow}</span>
-              <div class="card-title">
-                <span class="logo-tile" aria-hidden="true">
-                  <img
-                    src={group.logoUrl}
-                    alt=""
-                    width="40"
-                    height="40"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </span>
-                <h3>{group.title}</h3>
-              </div>
-              <ul>
-                {group.items.map((item) => <li>{item}</li>)}
-              </ul>
-            </article>
+        <div class="credential-summary" aria-label="Credential summary">
+          {credentialStats.map(([value, label]) => (
+            <div class="reveal-child">
+              <strong>{value}</strong>
+              <span>{label}</span>
+            </div>
           ))}
         </div>
+
+        <div class="credential-layout">
+          <section class="credential-panel reveal-child" aria-labelledby="education-heading">
+            <h3 class="subsection-title" id="education-heading">Education</h3>
+            <div class="education-list">
+              {credentials.map((group) => (
+                <article class="education-item reveal-child">
+                  <span class="logo-tile" aria-hidden="true">
+                    <img
+                      src={group.logoUrl}
+                      alt=""
+                      width="40"
+                      height="40"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </span>
+                  <div>
+                    <span class="label">{group.eyebrow}</span>
+                    <h3>{group.title}</h3>
+                    <p>{group.items[0]}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section class="credential-panel reveal-child" aria-labelledby="certifications-heading">
+            <h3 class="subsection-title" id="certifications-heading">Certifications</h3>
+            <div class="certification-stack">
+              {certifications.map((group) => (
+                <article class="cert-card reveal-child">
+                  <div class="card-title">
+                    <span class="logo-tile" aria-hidden="true">
+                      <img
+                        src={group.logoUrl}
+                        alt=""
+                        width="40"
+                        height="40"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </span>
+                    <div>
+                      <span class="label">{group.eyebrow}</span>
+                      <h3>{group.title}</h3>
+                    </div>
+                  </div>
+                  <div class="cert-badges" aria-label={`${group.title} credentials`}>
+                    {group.badges.map((item) => <span>{item}</span>)}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        </div>
+
       </section>
 
       <section class="section reveal">
         <div class="section-heading">
-          <span>05 OFF CLOCK</span>
+          <span>06 OFF CLOCK</span>
           <div>
             <h2>Off The Clock</h2>
             <p>
-              In my off time, I enjoy spending time doing physical activity,
-              playing music and following my favorite sports teams.
+              In my off time, I enjoy spending time with my family, doing
+              physical activity, playing music, and following my favorite
+              sports teams.
             </p>
           </div>
         </div>
 
-        <div class="credential-grid">
+        <div class="off-clock-grid">
           {offClock.map((item) => (
             <article class="reveal-child">
               <span class="label">{item.label}</span>
@@ -571,7 +695,7 @@ const offClock = [
       </section>
 
       <section class="contact reveal" id="contact">
-        <span>06 CONTACT</span>
+        <span>07 CONTACT</span>
         <h2>Let's Connect</h2>
         <p>
           Open to conversations about security strategy, product delivery, risk
@@ -600,9 +724,8 @@ const offClock = [
             GitHub
           </a>
           <a href="https://medium.com/@erichandal_84180" target="_blank" rel="noreferrer">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="none" d="M6 3.5h9.2L19 7.3v13.2H6z" />
-              <path fill="none" d="M15 3.8V8h4M9 11h6M9 14.5h6M9 18h4" />
+            <svg class="medium-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 6.2c.1-.2 0-.5-.2-.7L2.4 3.8v-.3h5.2l4 8.8 3.5-8.8H20v.3l-1.2 1.1c-.1.1-.2.3-.2.5v13.2c0 .2.1.4.2.5l1.2 1.1v.3h-6.2v-.3l1.2-1.2c.1-.1.1-.2.1-.5V7.9l-5 12.5h-.6L3.7 7.9v8.9c0 .4.1.7.4 1l1.6 2v.3H1v-.3l1.6-2c.3-.3.4-.6.4-1V6.2Z" />
             </svg>
             Blog
           </a>
@@ -610,8 +733,18 @@ const offClock = [
       </section>
     </main>
 
+    <footer class="site-footer">
+      <span>Built with Astro</span>
+      <span>Deployed on Cloudflare Pages</span>
+      <span>Austin, TX</span>
+    </footer>
+
     <script>
       const revealItems = document.querySelectorAll(".reveal, .reveal-child");
+      const sectionLinks = [...document.querySelectorAll('nav a[href^="#"]')];
+      const linkedSections = sectionLinks
+        .map((link) => document.querySelector(link.getAttribute("href")))
+        .filter(Boolean);
 
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(
@@ -630,6 +763,27 @@ const offClock = [
         );
 
         revealItems.forEach((item) => observer.observe(item));
+
+        const navObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                sectionLinks.forEach((link) => {
+                  link.classList.toggle(
+                    "is-active",
+                    link.getAttribute("href") === `#${entry.target.id}`,
+                  );
+                });
+              }
+            });
+          },
+          {
+            rootMargin: "-35% 0px -55% 0px",
+            threshold: 0.01,
+          },
+        );
+
+        linkedSections.forEach((section) => navObserver.observe(section));
       } else {
         revealItems.forEach((item) => item.classList.add("is-visible"));
       }
@@ -657,6 +811,7 @@ const offClock = [
   }
 
   :global(html) {
+    overflow-x: hidden;
     scroll-behavior: smooth;
     background: var(--bg);
     color: var(--text);
@@ -666,6 +821,7 @@ const offClock = [
   :global(body) {
     margin: 0;
     min-width: 320px;
+    overflow-x: hidden;
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 360px),
       var(--bg);
@@ -747,7 +903,12 @@ const offClock = [
     content: "06. ";
   }
 
+  nav a:nth-child(7)::before {
+    content: "07. ";
+  }
+
   nav a:hover,
+  nav a.is-active,
   .social-rail a:hover,
   .email-rail a:hover {
     color: var(--accent);
@@ -820,13 +981,42 @@ const offClock = [
   }
 
   .hero {
+    position: relative;
     display: grid;
     min-height: calc(100vh - 78px);
     padding: clamp(34px, 5vw, 62px) 0 72px;
     align-items: start;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0 -10vw auto auto;
+    width: min(520px, 48vw);
+    height: min(520px, 48vw);
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(215, 173, 69, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(215, 173, 69, 0.1) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: radial-gradient(circle at 62% 28%, black, transparent 68%);
+    opacity: 0.5;
+    animation: drift-grid 18s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift-grid {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(-18px, 14px, 0);
+    }
   }
 
   .hero-grid {
+    position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 34px;
@@ -899,7 +1089,20 @@ const offClock = [
 
   .actions a:hover {
     background: rgba(215, 173, 69, 0.12);
+    box-shadow: 0 0 24px rgba(215, 173, 69, 0.12);
     transform: translateY(-1px);
+  }
+
+  .actions .primary-action {
+    background: var(--accent);
+    color: var(--bg);
+    box-shadow: 0 10px 28px rgba(215, 173, 69, 0.14);
+    font-weight: 800;
+  }
+
+  .actions .primary-action:hover {
+    background: #e5bd5b;
+    color: var(--bg);
   }
 
   .actions svg {
@@ -919,13 +1122,12 @@ const offClock = [
   }
 
   .status-panel {
-    max-width: 760px;
+    max-width: 850px;
     border-left: 2px solid var(--accent);
     padding: 18px 0 18px 22px;
   }
 
-  .status-panel p,
-  .status-panel span {
+  .status-panel > p {
     margin: 0;
     color: var(--muted);
     font-family: var(--mono);
@@ -934,17 +1136,58 @@ const offClock = [
     text-transform: uppercase;
   }
 
-  .status-panel span {
-    display: block;
-    white-space: nowrap;
-  }
-
   .status-panel strong {
     display: block;
-    margin: 18px 0 10px;
+    margin: 0;
     color: var(--text);
     font-size: 24px;
     line-height: 1;
+  }
+
+  .status-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 18px 0 16px;
+  }
+
+  .status-tags {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .status-tags li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 190px;
+    min-height: 36px;
+    border: 1px solid var(--line);
+    padding: 0 10px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .status-tags li + li {
+    margin-top: 0;
+  }
+
+  .status-panel .status-note {
+    max-width: 680px;
+    margin: 34px 0 0;
+    color: var(--muted-strong);
+    font-size: 15px;
+    line-height: 1.55;
+    text-transform: none;
   }
 
   .stats {
@@ -997,7 +1240,37 @@ const offClock = [
 
   .section,
   .contact {
+    position: relative;
+    scroll-margin-top: 108px;
     padding: clamp(86px, 11vw, 136px) 0;
+  }
+
+  .section::after,
+  .contact::after {
+    content: "";
+    position: absolute;
+    inset: 34px -9vw auto auto;
+    z-index: -1;
+    width: min(420px, 42vw);
+    height: min(420px, 42vw);
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(215, 173, 69, 0.075) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(215, 173, 69, 0.075) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: radial-gradient(circle at 62% 28%, black, transparent 70%);
+    opacity: 0.34;
+  }
+
+  #focus::before,
+  #credentials::before {
+    content: "";
+    position: absolute;
+    inset: 0 calc(50% - 50vw);
+    z-index: -1;
+    background:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025), transparent 34%),
+      rgba(0, 0, 0, 0.08);
   }
 
   .section-heading {
@@ -1117,10 +1390,258 @@ const offClock = [
   }
 
   .focus-grid,
-  .credential-grid {
+  .credential-grid,
+  .work-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
+  }
+
+  .off-clock-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .off-clock-grid article {
+    min-height: 196px;
+  }
+
+  .work-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 260px;
+  }
+
+  .work-card::after {
+    content: "";
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    width: 64px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.42;
+  }
+
+  .work-card-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .work-number {
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .work-card p {
+    margin-top: 18px;
+  }
+
+  .featured-work {
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .tag-list span {
+    border: 1px solid rgba(215, 173, 69, 0.35);
+    background: rgba(215, 173, 69, 0.05);
+    color: var(--accent);
+    padding: 7px 9px;
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1;
+  }
+
+  .subsection-title {
+    margin: 56px 0 18px;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .subsection-title:first-of-type {
+    margin-top: 0;
+  }
+
+  .credential-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    margin-bottom: 46px;
+    border: 1px solid var(--line);
+    background: var(--line);
+  }
+
+  .credential-summary div {
+    min-height: 112px;
+    padding: 22px 18px;
+    background:
+      linear-gradient(180deg, rgba(215, 173, 69, 0.08), transparent),
+      rgba(255, 255, 255, 0.025);
+    text-align: center;
+  }
+
+  .credential-summary strong {
+    display: block;
+    color: var(--text);
+    font-size: 32px;
+    line-height: 1;
+  }
+
+  .credential-summary span {
+    display: block;
+    margin-top: 12px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+  .credential-layout {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    align-items: stretch;
+  }
+
+  .credential-panel {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.018);
+    padding: 28px;
+  }
+
+  .credential-panel > .subsection-title {
+    margin-top: 0;
+  }
+
+  .credential-panel > .subsection-title {
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .education-list {
+    display: grid;
+    gap: 0;
+    margin-top: 26px;
+  }
+
+  .education-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    padding: 20px 0;
+    transition:
+      border-color 160ms ease,
+      background 160ms ease;
+  }
+
+  .education-item:first-child {
+    padding-top: 0;
+  }
+
+  .education-item:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .education-item:hover {
+    transform: translateY(-1px);
+  }
+
+  .education-item .label {
+    margin-bottom: 5px;
+  }
+
+  .education-item h3 {
+    font-size: 20px;
+  }
+
+  .education-item p {
+    margin: 7px 0 0;
+    color: var(--muted-strong);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .certification-stack {
+    display: grid;
+    align-content: start;
+    gap: 0;
+    margin-top: 26px;
+  }
+
+  .cert-card {
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    padding: 20px 0;
+  }
+
+  .cert-card:first-child {
+    padding-top: 0;
+  }
+
+  .cert-card:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .cert-card:hover {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .cert-card .card-title {
+    align-items: flex-start;
+  }
+
+  .cert-card .label {
+    margin-bottom: 4px;
+  }
+
+  .cert-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .cert-badges span {
+    border: 1px solid rgba(215, 173, 69, 0.28);
+    background: rgba(215, 173, 69, 0.045);
+    color: var(--muted-strong);
+    padding: 8px 11px;
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1;
+  }
+
+  .cert-card:first-child .cert-badges span:first-child,
+  .cert-card:first-child .cert-badges span:nth-child(2),
+  .cert-card:first-child .cert-badges span:nth-child(3),
+  .cert-card:first-child .cert-badges span:nth-child(4) {
+    border-color: rgba(215, 173, 69, 0.55);
+    color: var(--accent);
   }
 
   article {
@@ -1136,6 +1657,7 @@ const offClock = [
   article:hover {
     border-color: rgba(215, 173, 69, 0.45);
     background: rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0 2px 0 rgba(215, 173, 69, 0.42);
     transform: translateY(-2px);
   }
 
@@ -1179,6 +1701,10 @@ const offClock = [
     margin: 0;
   }
 
+  article h3 + p {
+    margin-top: 14px;
+  }
+
   ul {
     margin: 0;
     padding: 0;
@@ -1196,25 +1722,87 @@ const offClock = [
   }
 
   .timeline {
+    position: relative;
     display: grid;
-    gap: 18px;
+    gap: 24px;
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    top: 24px;
+    bottom: 24px;
+    left: 156px;
+    width: 1px;
+    background: linear-gradient(var(--accent), rgba(215, 173, 69, 0.12));
   }
 
   .timeline article {
+    position: relative;
     display: grid;
-    grid-template-columns: 150px minmax(0, 1fr);
-    gap: 26px;
-    border-left: 2px solid transparent;
+    grid-template-columns: 130px 52px minmax(0, 1fr);
+    gap: 0;
+    align-items: start;
+    border: 0;
+    background: transparent;
+    padding: 0;
   }
 
-  .timeline article:first-child {
-    border-left-color: var(--accent);
+  .timeline article:hover {
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .timeline-marker {
+    position: relative;
+    z-index: 1;
+    display: block;
+    justify-self: center;
+    width: 20px;
+    height: 20px;
+    margin-top: 31px;
+    border: 1px solid var(--accent);
+    background: var(--bg);
+  }
+
+  .timeline-marker::after {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    background: var(--accent);
   }
 
   time,
   .job-heading span {
     color: var(--accent);
     font-size: 13px;
+  }
+
+  .timeline time {
+    padding-top: 30px;
+    color: var(--muted);
+  }
+
+  .timeline article:first-child time {
+    color: var(--accent);
+  }
+
+  .job-body {
+    border-left: 1px solid rgba(215, 173, 69, 0.2);
+    background: transparent;
+    padding: 8px 0 8px 28px;
+    transition:
+      border-color 160ms ease,
+      transform 160ms ease,
+      background 160ms ease;
+  }
+
+  .timeline article:hover .job-body {
+    border-color: rgba(215, 173, 69, 0.58);
+    background: transparent;
+    box-shadow: none;
+    transform: translateX(2px);
   }
 
   .job-heading {
@@ -1240,8 +1828,13 @@ const offClock = [
     place-items: center;
     width: 44px;
     height: 44px;
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(244, 242, 236, 0.14);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06)),
+      rgba(44, 44, 43, 0.92);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 8px 24px rgba(0, 0, 0, 0.16);
   }
 
   .logo-tile img {
@@ -1249,7 +1842,17 @@ const offClock = [
     max-width: 32px;
     max-height: 32px;
     border-radius: 2px;
+    opacity: 0.95;
     object-fit: contain;
+    transition:
+      transform 160ms ease,
+      opacity 160ms ease;
+  }
+
+  article:hover .logo-tile img,
+  .status-panel:hover .logo-tile img {
+    transform: scale(1.04);
+    opacity: 1;
   }
 
   .job-heading h3,
@@ -1292,6 +1895,24 @@ const offClock = [
     justify-content: center;
   }
 
+  .site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 18px;
+    padding: 26px 24px 42px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .site-footer span + span::before {
+    content: "/";
+    margin-right: 18px;
+    color: var(--accent);
+  }
+
   .reveal,
   .reveal-child {
     opacity: 0;
@@ -1315,18 +1936,24 @@ const offClock = [
 
   .stats .reveal-child:nth-child(2),
   .focus-grid .reveal-child:nth-child(2),
+  .work-grid .reveal-child:nth-child(2),
+  .credential-summary .reveal-child:nth-child(2),
   .credential-grid .reveal-child:nth-child(2) {
     transition-delay: 90ms;
   }
 
   .stats .reveal-child:nth-child(3),
   .focus-grid .reveal-child:nth-child(3),
+  .work-grid .reveal-child:nth-child(3),
+  .credential-summary .reveal-child:nth-child(3),
   .credential-grid .reveal-child:nth-child(3) {
     transition-delay: 180ms;
   }
 
   .stats .reveal-child:nth-child(4),
   .focus-grid .reveal-child:nth-child(4),
+  .work-grid .reveal-child:nth-child(4),
+  .credential-summary .reveal-child:nth-child(4),
   .credential-grid .reveal-child:nth-child(4) {
     transition-delay: 270ms;
   }
@@ -1352,6 +1979,10 @@ const offClock = [
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .hero::before {
+      animation: none;
+    }
+
     .reveal,
     .reveal-child {
       opacity: 1;
@@ -1394,19 +2025,38 @@ const offClock = [
       grid-template-columns: 1fr;
     }
 
+    .timeline::before,
+    .timeline-marker {
+      display: none;
+    }
+
+    .timeline time {
+      padding-top: 0;
+      margin-bottom: 12px;
+    }
+
     .status-panel {
       max-width: 360px;
     }
 
-    .status-panel span {
-      white-space: normal;
+    .status-tags {
+      flex-wrap: wrap;
+      margin-left: 0;
     }
 
     .stats,
+    .credential-summary,
     .focus-grid,
+    .work-grid,
+    .off-clock-grid,
     .credential-grid,
     .skill-list {
       grid-template-columns: 1fr;
+    }
+
+    .credential-layout {
+      grid-template-columns: 1fr;
+      gap: 50px;
     }
 
     .stats div {
