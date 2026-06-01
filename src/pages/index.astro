@@ -736,6 +736,10 @@ const offClock = [
     </main>
 
     <footer class="site-footer">
+      <div class="visitor-counter" aria-live="polite">
+        <span data-visitor-status>Site visits</span>
+        <strong data-visitor-count>--</strong>
+      </div>
       <a class="back-to-top" href="#top" aria-label="Back to top">
         <span>Back to top</span>
         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -751,6 +755,8 @@ const offClock = [
       const revealItems = document.querySelectorAll(".reveal, .reveal-child");
       const sectionLinks = [...document.querySelectorAll('nav a[href^="#"]')];
       const emailLinks = document.querySelectorAll(".email-link");
+      const visitorCount = document.querySelector("[data-visitor-count]");
+      const visitorStatus = document.querySelector("[data-visitor-status]");
       const linkedSections = sectionLinks
         .map((link) => document.querySelector(link.getAttribute("href")))
         .filter(Boolean);
@@ -770,6 +776,36 @@ const offClock = [
           }, 900);
         });
       });
+
+      async function updateVisitorCounter() {
+        if (!visitorCount || !visitorStatus) {
+          return;
+        }
+
+        try {
+          const response = await fetch("/api/visits", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error("Visitor counter unavailable");
+          }
+
+          const data = await response.json();
+          const visits = Number(data.visits || 0);
+
+          visitorCount.textContent = new Intl.NumberFormat("en-US").format(visits);
+          visitorStatus.textContent = "Recorded site visits";
+        } catch {
+          visitorCount.textContent = "--";
+          visitorStatus.textContent = "Visitor counter pending";
+        }
+      }
+
+      updateVisitorCounter();
 
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(
@@ -1986,6 +2022,31 @@ const offClock = [
     color: var(--muted);
     font-family: var(--mono);
     font-size: 12px;
+    text-align: center;
+  }
+
+  .visitor-counter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    color: var(--muted-strong);
+  }
+
+  .visitor-counter span {
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .visitor-counter strong {
+    min-width: 74px;
+    border: 1px solid var(--secondary-soft);
+    background: rgba(127, 167, 162, 0.055);
+    color: var(--text);
+    padding: 8px 11px;
+    font-size: 13px;
+    line-height: 1;
     text-align: center;
   }
 
