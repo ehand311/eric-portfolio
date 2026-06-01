@@ -336,7 +336,7 @@ const offClock = [
     </aside>
 
     <aside class="email-rail" aria-label="Email Eric Handal">
-      <a href="mailto:erichandal@gmail.com">erichandal@gmail.com</a>
+      <a class="email-link" href="mailto:erichandal@gmail.com?subject=Portfolio%20Inquiry">erichandal@gmail.com</a>
     </aside>
 
     <main id="top">
@@ -369,7 +369,7 @@ const offClock = [
               <a class="primary-action" href="#work">View Selected Work</a>
               <a href="#experience">Experience</a>
               <a href="https://www.linkedin.com/in/erichandal/" target="_blank" rel="noreferrer">LinkedIn</a>
-              <a href="mailto:erichandal@gmail.com">Email</a>
+              <a class="email-link" href="mailto:erichandal@gmail.com?subject=Portfolio%20Inquiry">Email</a>
             </div>
           </div>
 
@@ -706,7 +706,7 @@ const offClock = [
         </p>
 
         <div class="actions">
-          <a href="mailto:erichandal@gmail.com">
+          <a class="email-link" href="mailto:erichandal@gmail.com?subject=Portfolio%20Inquiry">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path fill="none" d="M4 6.5h16v11H4z" />
               <path fill="none" d="m4.5 7 7.5 6 7.5-6" />
@@ -736,6 +736,12 @@ const offClock = [
     </main>
 
     <footer class="site-footer">
+      <a class="back-to-top" href="#top" aria-label="Back to top">
+        <span>Back to top</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 5v14M6 11l6-6 6 6" />
+        </svg>
+      </a>
       <span>Built with Astro</span>
       <span>Deployed on Cloudflare Pages</span>
       <span>Austin, TX</span>
@@ -744,9 +750,26 @@ const offClock = [
     <script>
       const revealItems = document.querySelectorAll(".reveal, .reveal-child");
       const sectionLinks = [...document.querySelectorAll('nav a[href^="#"]')];
+      const emailLinks = document.querySelectorAll(".email-link");
       const linkedSections = sectionLinks
         .map((link) => document.querySelector(link.getAttribute("href")))
         .filter(Boolean);
+      const emailAddress = "erichandal@gmail.com";
+      const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailAddress)}`;
+
+      emailLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          const openedAt = Date.now();
+
+          window.setTimeout(() => {
+            const mailAppDidNotOpen = Date.now() - openedAt < 1600 && document.hasFocus();
+
+            if (mailAppDidNotOpen) {
+              window.open(gmailComposeUrl, "_blank", "noopener,noreferrer");
+            }
+          }, 900);
+        });
+      });
 
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(
@@ -771,10 +794,9 @@ const offClock = [
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
                 sectionLinks.forEach((link) => {
-                  link.classList.toggle(
-                    "is-active",
-                    link.getAttribute("href") === `#${entry.target.id}`,
-                  );
+                  const isActive = link.getAttribute("href") === `#${entry.target.id}`;
+                  link.classList.toggle("is-active", isActive);
+                  link.toggleAttribute("aria-current", isActive);
                 });
               }
             });
@@ -828,6 +850,7 @@ const offClock = [
     margin: 0;
     min-width: 320px;
     overflow-x: hidden;
+    padding-top: 78px;
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 360px),
       var(--bg);
@@ -839,9 +862,11 @@ const offClock = [
   }
 
   .site-header {
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 20;
+    left: 0;
+    right: 0;
+    z-index: 50;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -849,6 +874,7 @@ const offClock = [
     min-height: 78px;
     padding: 18px clamp(22px, 5vw, 68px);
     background: rgba(41, 41, 39, 0.91);
+    border-bottom: 1px solid rgba(244, 242, 236, 0.06);
     backdrop-filter: blur(16px);
   }
 
@@ -879,6 +905,7 @@ const offClock = [
 
   nav a {
     color: var(--muted-strong);
+    transition: color 160ms ease;
   }
 
   nav a::before {
@@ -917,6 +944,11 @@ const offClock = [
   nav a.is-active,
   .social-rail a:hover,
   .email-rail a:hover {
+    color: var(--accent);
+  }
+
+  nav a:hover::before,
+  nav a.is-active::before {
     color: var(--accent);
   }
 
@@ -1948,12 +1980,48 @@ const offClock = [
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: 12px 18px;
     padding: 26px 24px 42px;
     color: var(--muted);
     font-family: var(--mono);
     font-size: 12px;
     text-align: center;
+  }
+
+  .back-to-top {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: 100%;
+    max-width: 180px;
+    border: 1px solid rgba(127, 167, 162, 0.42);
+    color: var(--muted-strong);
+    padding: 12px 14px;
+    transition:
+      border-color 160ms ease,
+      color 160ms ease,
+      transform 160ms ease,
+      background 160ms ease;
+  }
+
+  .back-to-top:hover {
+    border-color: var(--accent);
+    background: rgba(215, 173, 69, 0.08);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .back-to-top svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
   }
 
   .site-footer span + span::before {
@@ -2048,8 +2116,11 @@ const offClock = [
   }
 
   @media (max-width: 860px) {
+    :global(body) {
+      padding-top: 146px;
+    }
+
     .site-header {
-      position: static;
       display: block;
       min-height: 0;
     }
