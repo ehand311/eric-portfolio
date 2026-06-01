@@ -1,6 +1,6 @@
 # Eric Handal Portfolio
 
-Astro portfolio site deployed on Cloudflare Pages.
+Astro portfolio site deployed on Cloudflare Workers with static assets.
 
 ## Commands
 
@@ -12,17 +12,21 @@ npm run build
 
 ## Visitor Counter
 
-The site includes a Cloudflare Pages Function at `/api/visits` that records page visits in a Cloudflare D1 database.
+The site includes a Cloudflare Worker endpoint at `/api/visits` that records page visits in a Cloudflare D1 database.
 
 ### Cloudflare Setup
 
 1. Create a D1 database in Cloudflare.
-2. In the Cloudflare Pages project, add a D1 binding:
+2. In the Cloudflare project, add a D1 binding:
    - Binding name: `DB`
    - Database: the D1 database created for this site
-3. Deploy the site.
+3. Use this deploy command:
 
-The function creates its `counters` table automatically on first request.
+```sh
+npx wrangler versions upload src/worker.js --assets=./dist --compatibility-date 2026-06-01
+```
+
+The Worker creates its `counters` table automatically on first request.
 
 ### API
 

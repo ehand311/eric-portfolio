@@ -9,8 +9,6 @@ const json = (payload, status = 200) =>
     },
   });
 
-const getDatabase = (env) => env.DB || env.VISITOR_DB;
-
 async function ensureCounter(db) {
   await db
     .prepare(
@@ -41,8 +39,8 @@ async function readCounter(db) {
   return Number(row?.value || 0);
 }
 
-export async function onRequestGet({ env }) {
-  const db = getDatabase(env);
+async function handleVisits(request, env) {
+  const db = env.DB || env.VISITOR_DB;
 
   if (!db) {
     return json({ error: "Visitor database binding is not configured." }, 503);
@@ -50,27 +48,35 @@ export async function onRequestGet({ env }) {
 
   await ensureCounter(db);
 
-  return json({ visits: await readCounter(db) });
-}
-
-export async function onRequestPost({ env }) {
-  const db = getDatabase(env);
-
-  if (!db) {
-    return json({ error: "Visitor database binding is not configured." }, 503);
+  if (request.method === "GET") {
+    return json({ visits: await readCounter(db) });
   }
 
-  await ensureCounter(db);
+  if (request.method === "POST") {
+    await db
+      .prepare(
+        `UPDATE counters
+         SET value = value + 1,
+             updated_at = CURRENT_TIMESTAMP
+         WHERE name = ?`,
+      )
+      .bind(COUNTER_NAME)
+      .run();
 
-  await db
-    .prepare(
-      `UPDATE counters
-       SET value = value + 1,
-           updated_at = CURRENT_TIMESTAMP
-       WHERE name = ?`,
-    )
-    .bind(COUNTER_NAME)
-    .run();
+    return json({ visits: await readCounter(db) });
+  }
 
-  return json({ visits: await readCounter(db) });
+  return json({ error: "Method not allowed." }, 405);
 }
+
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/api/visits") {
+      return handleVisits(request, env);
+    }
+
+    return env.ASSETS.fetch(request);
+  },
+};
