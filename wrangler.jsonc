@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "eric-portfolio",
+  "compatibility_date": "2026-06-01",
+  "main": "src/worker.js",
+  "assets": {
+    "directory": "./dist"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "eric-portfolio-visits",
+      "database_id": "d30859c6-7f4c-42a9-b687-aee33d00738d"
+    }
+  ]
+}

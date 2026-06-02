@@ -23,7 +23,7 @@ The site includes a Cloudflare Worker endpoint at `/api/visits` that records pag
 3. Use this deploy command:
 
 ```sh
-npx wrangler versions upload src/worker.js --assets=./dist --compatibility-date 2026-06-01
+npx wrangler versions upload
 ```
 
 The Worker creates its `counters` table automatically on first request.
