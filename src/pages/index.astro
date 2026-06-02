@@ -353,7 +353,17 @@ const offClock = [
           <div>
             <h1>
               Eric Handal.
-              <span>I build secure infrastructure, products, and risk platforms.</span>
+              <span class="hero-rotator">
+                <span class="hero-rotator-static">I help build secure</span>
+                <span class="rotating-words" aria-hidden="true">
+                  <span>infrastructure</span>
+                  <span>products</span>
+                  <span>risk platforms</span>
+                </span>
+                <span class="sr-only">
+                  infrastructure, products, and risk platforms.
+                </span>
+              </span>
             </h1>
 
             <p class="role">Senior Technical Program Manager</p>
@@ -899,6 +909,18 @@ const offClock = [
     text-decoration: none;
   }
 
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .site-header {
     position: fixed;
     top: 0;
@@ -1124,10 +1146,10 @@ const offClock = [
   }
 
   h1 {
-    max-width: 930px;
+    max-width: 1120px;
     margin: 0;
     color: var(--text);
-    font-size: clamp(42px, 6.5vw, 70px);
+    font-size: clamp(42px, 6vw, 66px);
     line-height: 1.05;
     letter-spacing: 0;
   }
@@ -1136,6 +1158,69 @@ const offClock = [
     display: block;
     margin-top: 10px;
     color: var(--muted);
+  }
+
+  h1 .hero-rotator {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    gap: 0.24em;
+    max-width: 1120px;
+  }
+
+  h1 .hero-rotator-static {
+    display: inline;
+    margin-top: 0;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  h1 .rotating-words {
+    position: relative;
+    display: inline-grid;
+    height: 1.08em;
+    min-width: 7.35em;
+    margin-top: 0;
+    overflow: hidden;
+    color: var(--accent);
+    vertical-align: bottom;
+  }
+
+  h1 .rotating-words span {
+    grid-area: 1 / 1;
+    display: block;
+    margin-top: 0;
+    color: var(--accent);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(85%);
+    animation: rotate-word 9s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+    white-space: nowrap;
+  }
+
+  h1 .rotating-words span:nth-child(2) {
+    animation-delay: 3s;
+  }
+
+  h1 .rotating-words span:nth-child(3) {
+    animation-delay: 6s;
+  }
+
+  @keyframes rotate-word {
+    0%,
+    5%,
+    28% {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    33.333%,
+    100% {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-85%);
+    }
   }
 
   .role {
@@ -2172,6 +2257,16 @@ const offClock = [
       animation: none;
     }
 
+    h1 .rotating-words span {
+      animation: none;
+    }
+
+    h1 .rotating-words span:first-child {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+
     .reveal,
     .reveal-child {
       opacity: 1;
@@ -2204,6 +2299,10 @@ const offClock = [
     nav {
       justify-content: flex-start;
       margin-top: 18px;
+    }
+
+    .hero-rotator {
+      flex-wrap: wrap;
     }
 
     main {
