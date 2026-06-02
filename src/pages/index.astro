@@ -300,7 +300,13 @@ const offClock = [
 
   <body>
     <header class="site-header">
-      <a class="brand" href="#top">E. HANDAL</a>
+      <div class="header-identity">
+        <a class="brand" href="#top">E. HANDAL</a>
+        <div class="visitor-counter" aria-live="polite">
+          <span data-visitor-status>Site visits</span>
+          <strong data-visitor-count>--</strong>
+        </div>
+      </div>
 
       <nav aria-label="Primary navigation">
         <a href="#about">About</a>
@@ -736,10 +742,6 @@ const offClock = [
     </main>
 
     <footer class="site-footer">
-      <div class="visitor-counter" aria-live="polite">
-        <span data-visitor-status>Site visits</span>
-        <strong data-visitor-count>--</strong>
-      </div>
       <a class="back-to-top" href="#top" aria-label="Back to top">
         <span>Back to top</span>
         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -798,10 +800,10 @@ const offClock = [
           const visits = Number(data.visits || 0);
 
           visitorCount.textContent = new Intl.NumberFormat("en-US").format(visits);
-          visitorStatus.textContent = "Recorded site visits";
+          visitorStatus.textContent = "Site visits";
         } catch {
           visitorCount.textContent = "--";
-          visitorStatus.textContent = "Visitor counter pending";
+          visitorStatus.textContent = "Visits pending";
         }
       }
 
@@ -927,6 +929,13 @@ const offClock = [
     font-weight: 800;
     line-height: 1;
     white-space: nowrap;
+  }
+
+  .header-identity {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 2vw, 20px);
+    min-width: 0;
   }
 
   nav {
@@ -2029,9 +2038,11 @@ const offClock = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    width: 100%;
+    gap: 9px;
     color: var(--muted-strong);
+    font-family: var(--mono);
+    font-size: 11px;
+    white-space: nowrap;
   }
 
   .visitor-counter span {
@@ -2040,12 +2051,12 @@ const offClock = [
   }
 
   .visitor-counter strong {
-    min-width: 74px;
+    min-width: 48px;
     border: 1px solid var(--secondary-soft);
     background: rgba(127, 167, 162, 0.055);
     color: var(--text);
-    padding: 8px 11px;
-    font-size: 13px;
+    padding: 7px 10px;
+    font-size: 12px;
     line-height: 1;
     text-align: center;
   }
@@ -2184,6 +2195,10 @@ const offClock = [
     .site-header {
       display: block;
       min-height: 0;
+    }
+
+    .header-identity {
+      justify-content: space-between;
     }
 
     nav {
