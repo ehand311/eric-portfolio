@@ -35,10 +35,33 @@ const focusAreas = [
 ];
 
 const stats = [
-  ["20+", "Years across security, risk, operations, and leadership"],
-  ["$55M+", "Revenue safeguarded through risk systems programs"],
-  ["$2.5M+", "Cost savings generated through optimization"],
-  ["55+", "Product and system capabilities implemented"],
+  {
+    value: "20+",
+    target: 20,
+    suffix: "+",
+    label: "Years across security, risk, operations, and leadership",
+  },
+  {
+    value: "$55M+",
+    target: 55,
+    prefix: "$",
+    suffix: "M+",
+    label: "Revenue safeguarded through risk systems programs",
+  },
+  {
+    value: "$2.5M+",
+    target: 2.5,
+    prefix: "$",
+    suffix: "M+",
+    decimals: 1,
+    label: "Cost savings generated through optimization",
+  },
+  {
+    value: "55+",
+    target: 55,
+    suffix: "+",
+    label: "Product and system capabilities implemented",
+  },
 ];
 
 const credentialStats = [
@@ -422,10 +445,18 @@ const offClock = [
       </section>
 
       <section class="stats reveal" aria-label="Professional summary">
-        {stats.map(([value, label]) => (
+        {stats.map((stat) => (
           <div class="reveal-child">
-            <strong>{value}</strong>
-            <span>{label}</span>
+            <strong
+              data-stat-number
+              data-target={stat.target}
+              data-prefix={stat.prefix ?? ""}
+              data-suffix={stat.suffix ?? ""}
+              data-decimals={stat.decimals ?? 0}
+            >
+              {stat.value}
+            </strong>
+            <span>{stat.label}</span>
           </div>
         ))}
       </section>
@@ -772,6 +803,8 @@ const offClock = [
       const emailLinks = document.querySelectorAll(".email-link");
       const visitorCount = document.querySelector("[data-visitor-count]");
       const visitorStatus = document.querySelector("[data-visitor-status]");
+      const statNumbers = document.querySelectorAll("[data-stat-number]");
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const linkedSections = sectionLinks
         .map((link) => document.querySelector(link.getAttribute("href")))
         .filter(Boolean);
@@ -822,6 +855,63 @@ const offClock = [
 
       updateVisitorCounter();
 
+      function formatStatNumber(value, prefix, suffix, decimals) {
+        const formatted = new Intl.NumberFormat("en-US", {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals,
+        }).format(value);
+
+        return `${prefix}${formatted}${suffix}`;
+      }
+
+      function setStatValue(stat, value) {
+        const prefix = stat.dataset.prefix || "";
+        const suffix = stat.dataset.suffix || "";
+        const decimals = Number(stat.dataset.decimals || 0);
+
+        stat.textContent = formatStatNumber(value, prefix, suffix, decimals);
+      }
+
+      function animateStat(stat) {
+        if (stat.dataset.animated === "true") {
+          return;
+        }
+
+        stat.dataset.animated = "true";
+
+        const target = Number(stat.dataset.target || 0);
+        const decimals = Number(stat.dataset.decimals || 0);
+        const start = decimals > 0 ? 1 : 1;
+        const duration = 1450;
+        const startedAt = performance.now();
+
+        function tick(now) {
+          const progress = Math.min((now - startedAt) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const rawValue = start + (target - start) * eased;
+          const value = decimals > 0 ? Number(rawValue.toFixed(decimals)) : Math.round(rawValue);
+
+          setStatValue(stat, value);
+
+          if (progress < 1) {
+            requestAnimationFrame(tick);
+          } else {
+            setStatValue(stat, target);
+          }
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      if (prefersReducedMotion) {
+        statNumbers.forEach((stat) => setStatValue(stat, Number(stat.dataset.target || 0)));
+      } else {
+        statNumbers.forEach((stat) => {
+          const decimals = Number(stat.dataset.decimals || 0);
+          setStatValue(stat, decimals > 0 ? 1 : 1);
+        });
+      }
+
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(
           (entries) => {
@@ -839,6 +929,25 @@ const offClock = [
         );
 
         revealItems.forEach((item) => observer.observe(item));
+
+        if (!prefersReducedMotion) {
+          const statObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  animateStat(entry.target);
+                  statObserver.unobserve(entry.target);
+                }
+              });
+            },
+            {
+              rootMargin: "0px 0px -10% 0px",
+              threshold: 0.45,
+            },
+          );
+
+          statNumbers.forEach((stat) => statObserver.observe(stat));
+        }
 
         const navObserver = new IntersectionObserver(
           (entries) => {
@@ -861,6 +970,7 @@ const offClock = [
         linkedSections.forEach((section) => navObserver.observe(section));
       } else {
         revealItems.forEach((item) => item.classList.add("is-visible"));
+        statNumbers.forEach((stat) => setStatValue(stat, Number(stat.dataset.target || 0)));
       }
     </script>
   </body>
@@ -1197,16 +1307,16 @@ const offClock = [
     opacity: 0;
     visibility: hidden;
     transform: translateY(85%);
-    animation: rotate-word 9s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+    animation: rotate-word 6s cubic-bezier(0.76, 0, 0.24, 1) infinite;
     white-space: nowrap;
   }
 
   h1 .rotating-words span:nth-child(2) {
-    animation-delay: 3s;
+    animation-delay: 2s;
   }
 
   h1 .rotating-words span:nth-child(3) {
-    animation-delay: 6s;
+    animation-delay: 4s;
   }
 
   @keyframes rotate-word {
