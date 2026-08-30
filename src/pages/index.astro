@@ -546,13 +546,15 @@ const offClock = [
           </div>
 
           <figure class="portrait-frame">
-            <img
-              src="/eric-handal-headshot-new.png"
-              alt="Eric Handal"
-              width="512"
-              height="512"
-              loading="lazy"
-            />
+            <span class="portrait-window">
+              <img
+                src="/eric-handal-headshot-new.png"
+                alt="Eric Handal"
+                width="512"
+                height="512"
+                loading="lazy"
+              />
+            </span>
           </figure>
         </div>
       </section>
@@ -1764,14 +1766,24 @@ const offClock = [
     border-radius: 16px;
   }
 
-  .portrait-frame img {
+  .portrait-window {
     display: block;
     width: 100%;
     aspect-ratio: 1;
+    overflow: hidden;
     border: 1px solid var(--line);
     border-radius: 10px;
+    background: var(--panel);
+  }
+
+  .portrait-window img {
+    display: block;
+    width: 100%;
+    height: 100%;
     filter: saturate(0.78) contrast(1.02);
     object-fit: cover;
+    object-position: center 45%;
+    transform: scale(1.18);
   }
 
   .focus-grid,
