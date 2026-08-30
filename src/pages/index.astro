@@ -1709,7 +1709,7 @@ const offClock = [
 
   .about-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
     gap: 64px;
     align-items: start;
   }
@@ -1752,18 +1752,19 @@ const offClock = [
     position: relative;
     margin: 0;
     padding: 10px;
+    width: min(100%, 420px);
     border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: 50%;
     background: var(--panel);
   }
 
   .portrait-frame::after {
     content: "";
     position: absolute;
-    inset: 24px -18px -18px 24px;
+    inset: 20px -18px -18px 20px;
     z-index: -1;
     border: 2px solid var(--accent);
-    border-radius: 16px;
+    border-radius: 50%;
   }
 
   .portrait-window {
@@ -1772,7 +1773,7 @@ const offClock = [
     aspect-ratio: 1;
     overflow: hidden;
     border: 1px solid var(--line);
-    border-radius: 10px;
+    border-radius: 50%;
     background: var(--panel);
   }
 
@@ -1782,8 +1783,7 @@ const offClock = [
     height: 100%;
     filter: saturate(0.78) contrast(1.02);
     object-fit: cover;
-    object-position: center 45%;
-    transform: scale(1.18);
+    object-position: center center;
   }
 
   .focus-grid,
@@ -2612,7 +2612,7 @@ const offClock = [
     }
 
     .portrait-frame {
-      max-width: 320px;
+      max-width: 380px;
     }
   }
 
