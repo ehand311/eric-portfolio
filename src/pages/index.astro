@@ -1709,9 +1709,9 @@ const offClock = [
 
   .about-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
-    gap: 64px;
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+    gap: clamp(44px, 6vw, 76px);
+    align-items: center;
   }
 
   .about-copy p {
@@ -1751,20 +1751,30 @@ const offClock = [
   .portrait-frame {
     position: relative;
     margin: 0;
-    padding: 10px;
-    width: min(100%, 420px);
-    border: 1px solid var(--line);
+    width: min(100%, 360px);
+    padding: 12px;
+    justify-self: end;
+    border: 1px solid color-mix(in srgb, var(--line), var(--text) 12%);
     border-radius: 50%;
-    background: var(--panel);
+    background:
+      linear-gradient(var(--panel), var(--panel)) padding-box,
+      conic-gradient(
+        from 148deg,
+        transparent 0 54%,
+        color-mix(in srgb, var(--accent), transparent 8%) 54% 86%,
+        transparent 86% 100%
+      ) border-box;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
   }
 
   .portrait-frame::after {
     content: "";
     position: absolute;
-    inset: 20px -18px -18px 20px;
+    inset: -12px;
     z-index: -1;
-    border: 2px solid var(--accent);
+    border: 1px solid color-mix(in srgb, var(--line), var(--text) 14%);
     border-radius: 50%;
+    opacity: 0.72;
   }
 
   .portrait-window {
@@ -1772,7 +1782,7 @@ const offClock = [
     width: 100%;
     aspect-ratio: 1;
     overflow: hidden;
-    border: 1px solid var(--line);
+    border: 1px solid color-mix(in srgb, var(--line), var(--text) 14%);
     border-radius: 50%;
     background: var(--panel);
   }
@@ -2613,6 +2623,7 @@ const offClock = [
 
     .portrait-frame {
       max-width: 380px;
+      justify-self: center;
     }
   }
 
